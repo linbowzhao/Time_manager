@@ -1,0 +1,62 @@
+<!--index.wxml-->
+<image class="tip" src="{{imgSrc}}" mode="aspectFill" style="display:{{firstLog?'block':'none'}}"></image>
+<view class="container">
+  <view class="todoAll" wx:for="{{list}}" wx:for-key="index" wx:for-item="item">
+    <movable-area class="todoArea">
+      <movable-view class="todoBar" direction="horizontal" damping="30" friction="1" out-of-bounds="true" catchtouchstart="start" catchtouchmove="move" catchtouchend="end" id="{{index+1}}" style="background:{{item.chooseColor}}">
+        <view class="text">
+          <view class="todoProgress">{{item.todoProgress}}%</view>
+          <view class="todoText">{{item.todoText}}</view>
+          <view class="todoTime">{{item.todoTime}}</view>
+          <image class="workImg" src="../../img/work.gif" mode="aspectFit" hidden="{{item.work}}"></image>
+          <view class="todoDone">{{item.todoDone}}</view>
+          <progress class="progressBar" percent="{{item.todoProgress}}" activeColor="#37bc9b" backgroundColor="{{item.chooseColor}}" stroke-width="4" active/>
+        </view>
+      </movable-view>
+    </movable-area>
+
+  </view>
+</view>
+
+<view class="float" bindtap="float">{{call}}</view>
+<view class="clear" bindtap="clear" animation="{{buttonAni}}"><image class="buttonIcon" src="../../img/clear.png" style="width:50%;height:50%;margin-top:9px"></image></view>
+<view class="add" bindtap="add" animation="{{buttonAni}}"><image class="buttonIcon" src="../../img/add.png" style="width:50%;height:50%;margin-top:9px"></image></view>
+
+
+<view class="addForm" animation="{{addAnimation}}">
+  <form bindsubmit="formSubmit" class="white">
+    <input class="todoName" name="todoName" type="text" placeholder=" 任务名" placeholder-class="place" maxlength="9" />
+    <view class="label">预设时间</view>
+    <picker-view class="timePicker" value="{{first}}" indicator-style="height:50px" catchchange="pickerChange">
+      <picker-view-column>
+        <view class="hour" name="hour" wx:for="{{hours}}" style="line-height:50px;text-align:center;">{{item}}</view>
+      </picker-view-column>
+      <picker-view-column>
+        <view class="min" name="min" wx:for="{{mins}}" style="line-height:50px;text-align:center">{{item}}</view>
+      </picker-view-column>
+    </picker-view>
+    <view class="formButton">
+      <button size="mini" type="primary" form-type="submit">添加</button>
+      <button size="mini" type="warn" bindtap="cancel">取消</button>
+    </view>
+  </form>
+</view>
+
+<view class="editForm" animation="{{editAnimation}}">
+  <form bindsubmit="editSubmit" class="white">
+    <input class="todoName" name="todoName" type="text" placeholder=" 任务名" placeholder-class="place" maxlength="9" value="{{editName}}" />
+    <view class="label">预设时间</view>
+    <picker-view class="timePicker" value="{{first}}" indicator-style="height:50px" catchchange="pickerChange" value="{{valueID}}">
+      <picker-view-column>
+        <view class="hour" name="hour" wx:for="{{hours}}" style="line-height:50px;text-align:center;">{{item}}</view>
+      </picker-view-column>
+      <picker-view-column>
+        <view class="min" name="min" wx:for="{{mins}}" style="line-height:50px;text-align:center" value="{{minID}}">{{item}}</view>
+      </picker-view-column>
+    </picker-view>
+    <view class="formButton">
+      <button size="mini" type="warn" catchtap="del">删除</button>
+      <button size="mini" type="primary" form-type="submit">修改</button>
+    </view>
+  </form>
+</view>

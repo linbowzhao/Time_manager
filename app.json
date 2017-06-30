@@ -1,0 +1,12 @@
+{
+  "pages":[
+    "pages/index/index"
+  ],
+    "window": {
+      "navigationBarBackgroundColor": "#37bc9b",
+      "navigationBarTextStyle": "white",
+      "navigationBarTitleText": "TIME",
+      "backgroundColor": "#ffffff",
+      "backgroundTextStyle": "light"
+    }
+}
